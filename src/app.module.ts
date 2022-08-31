@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import databaseConfig from "./config/database.config";
 import { DataSource } from "typeorm";
 import { parse } from "@typescript-eslint/parser";
+import { MarketModule } from './modules/market/market.module';
 
 @Module({
   imports: [
@@ -15,13 +16,14 @@ import { parse } from "@typescript-eslint/parser";
         isGlobal: true
       }
     ),
-    TypeOrmModule.forRoot()
+    TypeOrmModule.forRoot(),
+    MarketModule
   ],
   controllers: [AppController],
   providers: [AppService]
 })
 export class AppModule {
-  private logger = new Logger("MyService.name");
+  private logger = new Logger("Market.name");
 
   constructor(dataSource: DataSource, config: ConfigService) {
 
