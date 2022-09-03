@@ -5,7 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import databaseConfig from './config/database.config';
 import { MarketModule } from './modules/market/market.module';
-import { HtppService } from './services/util/htpp/htpp.service';
+import { HttpService } from './services/utils/http/http.service';
+
 
 @Module({
   imports: [
@@ -32,7 +33,7 @@ import { HtppService } from './services/util/htpp/htpp.service';
     MarketModule,
   ],
   controllers: [AppController],
-  providers: [AppService, HtppService],
+  providers: [AppService, HttpService],
 })
 export class AppModule {
   constructor() {
