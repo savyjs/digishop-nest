@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 
 @Entity()
 export class Product {
@@ -6,11 +6,18 @@ export class Product {
   id: number;
 
   @Column()
-  firstName: string;
+  name: string;
 
   @Column()
-  lastName: string;
+  url: string;
 
-  @Column({ default: true })
-  isActive: boolean;
+  @Column()
+  digikala_id: string;
+
+  @OneToMany(() => Photo, (photo) => photo.user)
+  photos: Photo[]
+
+  @Column()
+  created_at: string;
+
 }
