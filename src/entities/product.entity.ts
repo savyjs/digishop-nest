@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { ProductData } from './product-data.entity';
 
 @Entity()
 export class Product {
@@ -14,8 +15,8 @@ export class Product {
   @Column()
   digikala_id: string;
 
-  @OneToMany(() => Photo, (photo) => photo.user)
-  photos: Photo[]
+  @OneToMany(() => ProductData, (productData) => productData.productId)
+  photos: ProductData[]
 
   @Column()
   created_at: string;
