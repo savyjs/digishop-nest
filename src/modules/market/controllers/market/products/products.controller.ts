@@ -1,11 +1,15 @@
 import { Controller, Get, Param } from "@nestjs/common";
+import { HttpClientService } from "../../../services/http-client/http-client.service";
 
-@Controller('products')
+@Controller("products")
 export class ProductsController {
-  @Get(':id')
+  private httpClientService: HttpClientService;
+
+  @Get(":id")
   findOne(@Param() params): object {
-    let url = 'https://api.digikala.com/v1/product/6390361/';
-    let object = {};
+    let id = params.id;
+    let object = this.httpClientService.findOne(id);
+    console.log({ object });
     return object;
   }
 }
