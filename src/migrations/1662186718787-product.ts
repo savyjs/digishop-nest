@@ -18,6 +18,12 @@ export class product1662186718787 implements MigrationInterface {
             type: "varchar"
           },
           {
+            name: "digikala_id",
+            isNullable: true,
+            type: "varchar",
+            isUnique: true
+          },
+          {
             name: "created_at",
             type: "timestamp",
             default: "now()"
@@ -46,7 +52,7 @@ export class product1662186718787 implements MigrationInterface {
             isPrimary: true
           },
           {
-            name: "json",
+            name: "data",
             type: "json"
           },
           {

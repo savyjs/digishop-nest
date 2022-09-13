@@ -25,8 +25,9 @@ import { MarketModule } from "./modules/market/market.module";
           password: config.get("database.password"),
           username: config.get("database.username"),
           database: config.get("database.name"),
-          migrations: [__dirname + "/../migrations/*{.js,.ts}"],
-          entities: [__dirname + "/../entities/*{.js,.ts}"],
+          migrations: [__dirname + "/migrations/*{.js,.ts}"],
+          entities: [__dirname + "/entities/*{.js,.ts}"],
+          synchronize: true,
           migrationsTableName: "migrations"
         }
       )

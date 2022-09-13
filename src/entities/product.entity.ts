@@ -1,8 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
-import { ProductData } from './product-data.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, Unique, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { ProductData } from "./product-data.entity";
 
 @Entity()
+@Unique('constraint_name', ['digikala_id'])
 export class Product {
+
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -15,10 +17,13 @@ export class Product {
   @Column()
   digikala_id: string;
 
-  @OneToMany(() => ProductData, (productData) => productData.productId)
-  photos: ProductData[]
+  @OneToMany(() => ProductData, (productData) => productData.product)
+  data: ProductData[];
 
-  @Column()
-  created_at: string;
+  @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+  public created_at: Date;
+
+  @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+  public updated_at: Date;
 
 }

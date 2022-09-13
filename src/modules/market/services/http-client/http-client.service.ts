@@ -8,7 +8,8 @@ export class HttpClientService {
   constructor(private readonly httpService: HttpService) {
   }
 
-  findOne(id: string): Observable<AxiosResponse> {
-    return this.httpService.get("https://api.digikala.com/v1/product/" + id);
+  findOne(url: string): Observable<AxiosResponse> {
+    return this.httpService.get(url);
   }
+
 }
