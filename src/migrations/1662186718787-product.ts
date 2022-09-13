@@ -2,82 +2,84 @@ import { MigrationInterface, QueryRunner, Table, TableColumn, TableForeignKey, T
 
 export class product1662186718787 implements MigrationInterface {
 
-    public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.createTable(
-          new Table({
-              name: "products",
-              columns: [
-                  {
-                      name: "id",
-                      type: "int",
-                      isPrimary: true,
-                  },
-                  {
-                      name: "name",
-                      type: "varchar",
-                  },
-                  {
-                      name: "created_at",
-                      type: "timestamp",
-                      default: "now()",
-                  },
-              ],
-          }),
-          true,
-        )
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.createTable(
+      new Table({
+        name: "products",
+        columns: [
+          {
+            name: "id",
+            type: "int",
+            isGenerated: true,
+            isPrimary: true
+          },
+          {
+            name: "name",
+            type: "varchar"
+          },
+          {
+            name: "created_at",
+            type: "timestamp",
+            default: "now()"
+          }
+        ]
+      }),
+      true
+    );
 
-        await queryRunner.createIndex(
-          "products",
-          new TableIndex({
-              name: "IDX_products_NAME",
-              columnNames: ["name"],
-          }),
-        )
+    await queryRunner.createIndex(
+      "products",
+      new TableIndex({
+        name: "IDX_products_NAME",
+        columnNames: ["name"]
+      })
+    );
 
-        await queryRunner.createTable(
-          new Table({
-              name: "product_data",
-              columns: [
-                  {
-                      name: "id",
-                      type: "int",
-                      isPrimary: true,
-                  },
-                  {
-                      name: "json",
-                      type: "json",
-                  },
-                  {
-                      name: "created_at",
-                      type: "timestamp",
-                      default: "now()",
-                  },
-              ],
-          }),
-          true,
-        )
+    await queryRunner.createTable(
+      new Table({
+        name: "product_data",
+        columns: [
+          {
+            name: "id",
+            type: "int",
+            isGenerated: true,
+            isPrimary: true
+          },
+          {
+            name: "json",
+            type: "json"
+          },
+          {
+            name: "created_at",
+            type: "timestamp",
+            default: "now()"
+          }
+        ]
+      }),
+      true
+    );
 
-        await queryRunner.addColumn(
-          "product_data",
-          new TableColumn({
-              name: "productId",
-              type: "int",
-          }),
-        )
+    await queryRunner.addColumn(
+      "product_data",
+      new TableColumn({
+        name: "productId",
+        type: "int"
+      })
+    );
 
-        await queryRunner.createForeignKey(
-          "product_data",
-          new TableForeignKey({
-              columnNames: ["productId"],
-              referencedColumnNames: ["id"],
-              referencedTableName: "products",
-              onDelete: "CASCADE",
-          }),
-        )
-    }
+    await queryRunner.createForeignKey(
+      "product_data",
+      new TableForeignKey({
+        columnNames: ["productId"],
+        referencedColumnNames: ["id"],
+        referencedTableName: "products",
+        onDelete: "CASCADE"
+      })
+    );
+  }
 
-    public async down(queryRunner: QueryRunner): Promise<void> {
+  public async down(queryRunner: QueryRunner): Promise<void> {
 
-    }
+  }
 
 }
