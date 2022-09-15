@@ -1,7 +1,7 @@
 import { Controller, Get, Param } from "@nestjs/common";
-import { HttpClientService } from "../../../services/http-client/http-client.service";
+import { HttpClientService } from "../../services/http-client/http-client.service";
 import { map } from "rxjs";
-import { ProductsService } from "../../../services/products/products.service";
+import { ProductsService } from "../../services/products/products.service";
 
 @Controller("products")
 export class ProductsController {
